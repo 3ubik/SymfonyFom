@@ -66,8 +66,7 @@ class AddProductAndCountryDataController extends AbstractController
         if(isset($message)){
             $renderParameters['message'] = $message;
         }
-        return new Response(
-            $this->render(self::FORM_TEMPLATE, $renderParameters));
+        return $this->render(self::FORM_TEMPLATE, $renderParameters);
 
     }
 }
