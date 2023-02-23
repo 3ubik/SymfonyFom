@@ -2,6 +2,11 @@
 
 {% block body %}
     {{ form(calculation_price_form) }}
-    {{ calculated_result.result_price ?? '' }}
-    {{ calculated_result.result_country ?? '' }}
+    <div class="calculated_price">
+        Price with Tax: {{ calculated_result.result_price ?? '' }}
+    </div>
+    <div class="calculated_price_country">
+        Country: {{ calculated_result.result_country ?? '' }}
+    </div>
+
 {% endblock %}

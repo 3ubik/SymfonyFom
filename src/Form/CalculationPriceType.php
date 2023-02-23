@@ -24,7 +24,7 @@ class CalculationPriceType extends AbstractType
                     return 'Name:' . $product->getName() . ' Price:' . $product->getPrice();
                 }
             ])
-            ->add('save', SubmitType::class);
+            ->add('Calculate', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
