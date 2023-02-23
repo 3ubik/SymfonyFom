@@ -30,6 +30,7 @@ class Country
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank]
+    #[Assert\Positive]
     private $country_tax;
 
     public function getId(): ?int

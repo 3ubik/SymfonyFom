@@ -21,6 +21,7 @@ class Product
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 3)]
     #[Assert\NotBlank]
+    #[Assert\Positive]
     private $price;
 
     public function getId(): ?int
