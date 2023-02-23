@@ -17,6 +17,7 @@ class IsValidTaxNumberValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
+        $validationResult = true;
         if (null === $value || '' === $value) {
             return;
         }
@@ -24,14 +25,19 @@ class IsValidTaxNumberValidator extends ConstraintValidator
         $countryCodeFromInput = $this->countryRepository
             ->findOneByCountryCode(substr($value, 0, 2));
 
-        if ($countryCodeFromInput !== null) {
+        if (isset($countryCodeFromInput)) {
             $taxNumbers = substr($value, 2);
             if (!is_numeric($taxNumbers) || strlen($taxNumbers) !== 9) {
-                $this->context->buildViolation($constraint->message)
-                    ->setParameter('%string%', $value)
-                    ->addViolation();
+                $validationResult = false;
             }
+        } else {
+            $validationResult = false;
+        }
 
+        if(!$validationResult){
+            $this->context->buildViolation($constraint->message)
+                ->setParameter('%string%', $value)
+                ->addViolation();
         }
     }
 }

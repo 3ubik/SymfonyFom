@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form(calculation_price_form) }}
-    <div class="calculated_price">
-        Price with Tax: {{ calculated_result.result_price ?? '' }}
+    <div class="container-sm">
+        {{ form(calculation_price_form) }}
+        <div class="calculated_price">
+            Price with Tax: {{ calculated_result.result_price ?? '' }}
+        </div>
+        <div class="calculated_price_country">
+            Country: {{ calculated_result.result_country ?? '' }}
+        </div>
     </div>
-    <div class="calculated_price_country">
-        Country: {{ calculated_result.result_country ?? '' }}
-    </div>
+
 
 {% endblock %}
