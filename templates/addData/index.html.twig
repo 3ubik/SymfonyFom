@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Product Form</h2>
+    {{ form(add_product_form) }}
+    <h2>Country Form</h2>
+    {{ form(add_country_form) }}
+    {{ message ?? '' }}
+{% endblock %}
