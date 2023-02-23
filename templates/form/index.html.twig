@@ -2,4 +2,6 @@
 
 {% block body %}
     {{ form(calculation_price_form) }}
+    {{ calculated_result.result_price ?? '' }}
+    {{ calculated_result.result_country ?? '' }}
 {% endblock %}

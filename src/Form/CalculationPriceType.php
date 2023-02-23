@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\CalculationPrice;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,20 +17,20 @@ class CalculationPriceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customer_tax_number', TextType::class)
-            ->add('save', SubmitType::class)
-            ->add('products', EntityType::class, [
+            ->add('tax_number', TextType::class)
+            ->add('product', EntityType::class, [
                 'class' => Product::class,
                 'choice_label' => function ($product) {
                     return 'Name:' . $product->getName() . ' Price:' . $product->getPrice();
                 }
-            ]);
+            ])
+            ->add('save', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => CalculationPrice::class,
         ]);
     }
 }

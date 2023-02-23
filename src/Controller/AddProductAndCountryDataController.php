@@ -15,12 +15,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AddProductAndCountryDataController extends AbstractController
 {
+    private const SUCCES_PRODUCT_MESSAGE = 'Product added Successfully';
+
+    private const SUCCES_COUNTRY_MESSAGE = 'Country added Successfully';
+
+    private const FORM_TEMPLATE = 'addData/index.html.twig';
+
+    /**
+     * @param ProductRepository $productRepository
+     * @param CountryRepository $countryRepository
+     */
     public function __construct(
         private readonly ProductRepository $productRepository,
         private readonly CountryRepository $countryRepository)
     {
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/addData', name: 'addData')]
     public function index(Request $request): Response
     {
@@ -35,13 +49,13 @@ class AddProductAndCountryDataController extends AbstractController
         $productForm->handleRequest($request);
         if ($productForm->isSubmitted() && $productForm->isValid()) {
             $this->productRepository->add($product, true);
-            $message = 'Product added Successfully';
+            $message = self::SUCCES_PRODUCT_MESSAGE;
         }
 
         $countryForm->handleRequest($request);
         if ($countryForm->isSubmitted() && $countryForm->isValid()) {
             $this->countryRepository->add($country, true);
-            $message = 'Country added Successfully';
+            $message = self::SUCCES_COUNTRY_MESSAGE;
         }
 
         $renderParameters = [
@@ -53,7 +67,7 @@ class AddProductAndCountryDataController extends AbstractController
             $renderParameters['message'] = $message;
         }
         return new Response(
-            $this->render('addData/index.html.twig', $renderParameters));
+            $this->render(self::FORM_TEMPLATE, $renderParameters));
 
     }
 }

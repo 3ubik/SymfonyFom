@@ -14,11 +14,10 @@ class CountryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('country_name',TextType::class)
+            ->add('country_name', TextType::class)
             ->add('country_code', TextType::class)
             ->add('country_tax', TextType::class)
-            ->add('save', SubmitType::class)
-        ;
+            ->add('save', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
