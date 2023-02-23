@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CountryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
 class Country
@@ -14,12 +15,21 @@ class Country
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $country_name;
 
     #[ORM\Column(type: 'string', length: 2)]
+    #[Assert\Length(
+        min: 2,
+        max: 2,
+        minMessage: 'Your Country code must be at least {{ limit }} characters long',
+        maxMessage: 'Your Country code must be at least {{ limit }} characters long',
+    )]
+    #[Assert\NotBlank]
     private $country_code;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank]
     private $country_tax;
 
     public function getId(): ?int

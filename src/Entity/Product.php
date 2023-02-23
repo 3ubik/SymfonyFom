@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -14,9 +16,11 @@ class Product
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $name;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 3)]
+    #[Assert\NotBlank]
     private $price;
 
     public function getId(): ?int
